@@ -1,15 +1,24 @@
-const form=document.querySelector('form');
-const button=form.querySelector('[type="email"]');
-function checkEmail(e){
-e.preventEvent();
+const form= document.querySelector('form');
+const button= form.querySelector('[type="email"]');
+const msg= 'Please provide  a valid email';
+
+const error= document.createElement('p');
+error.classList.add('error_text');
+error.textContent=msg;
+
+
+function checkEmail (e){
+e.preventDefault();
 const email=e.target.querySelector('[type="email"]').value;
-if(validateEmail(email))
+if( !validateEmail(email))
 {
     form.classList.add('error');
+    form.insertBefore(error, button);
 }
 else
 {
     form.classList.remove('error');  
+    form.removeChild(error);
 }
 console.log(email);
 }
